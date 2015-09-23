@@ -96,3 +96,10 @@ myAny cond x = foldr (\x y -> cond x || y) False x
 cycle' :: [a] -> [a]
 cycle' list = foldr step [] [1..]
   where step _ ys = list ++ ys
+
+words' :: String -> [String]
+words' list = foldr step [] (zip list (tail list ++ " "))
+  where step (a,b) gs 
+             | a == ' ' = gs
+             | b == ' ' = [a]:gs
+             | otherwise = (a:(head gs)):(tail gs)
